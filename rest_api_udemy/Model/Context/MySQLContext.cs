@@ -4,11 +4,6 @@ namespace rest_api_udemy.Model.Context
 {
     public class MySQLContext: DbContext
     {
-        public MySQLContext()
-        {
-
-        }
-
         public MySQLContext(DbContextOptions<MySQLContext> options): base(options)
         {
 

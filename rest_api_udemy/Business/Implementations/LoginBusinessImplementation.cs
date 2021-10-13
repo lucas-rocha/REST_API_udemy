@@ -81,5 +81,10 @@ namespace rest_api_udemy.Business.Implementations
                 refreshToken
             );
         }
+
+        public bool RevokeToken(string userName)
+        {
+            return _repository.RevokeToken(userName);
+        }
     }
 }

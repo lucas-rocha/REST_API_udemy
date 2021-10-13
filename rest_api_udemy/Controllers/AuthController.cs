@@ -31,6 +31,16 @@ namespace rest_api_udemy.Controllers
 
             return Ok(token);
         }
+
+        [HttpPost]
+        [Route("refresh")]
+        public IActionResult Refresh([FromBody] TokenVO tokenVo)
+        {
+            if (tokenVo is null) return BadRequest("Invalid client request");
+            var token = _loginBusiness.ValidateCredentials(tokenVo);
+            if (token == null) return BadRequest("Invalid client request");
+            return Ok(token);
+        }
     }
 
 }

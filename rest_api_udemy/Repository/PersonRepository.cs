@@ -2,6 +2,7 @@
 using rest_api_udemy.Model.Context;
 using rest_api_udemy.Repository.Generic;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace rest_api_udemy.Repository
@@ -29,6 +30,28 @@ namespace rest_api_udemy.Repository
                 }
             }
             return user;
+        }
+
+        public List<Person> FindByName(string firstName, string lastName)
+        {
+            if(!string.IsNullOrWhiteSpace(firstName) && !string.IsNullOrWhiteSpace(lastName))
+            {
+                return _context.Persons.Where(
+                    p => p.FirstName.Contains(firstName)
+                    && p.LastName.Contains(lastName)).ToList();
+            }
+            else if (string.IsNullOrWhiteSpace(firstName) && !string.IsNullOrWhiteSpace(lastName))
+            {
+                return _context.Persons.Where(
+                    p => p.LastName.Contains(lastName)).ToList();
+            }
+            else if (!string.IsNullOrWhiteSpace(firstName) && string.IsNullOrWhiteSpace(lastName))
+            {
+                return _context.Persons.Where(
+                    p => p.FirstName.Contains(firstName)).ToList();
+            }
+            return null;
+
         }
     }
 }
